@@ -10,7 +10,7 @@ def hillclimb(init_function, move_operator,
     best = init_function()
     best_score = objective_function(best)
 
-    num_evaluations=1
+    num_evaluations = 1
 
     logging.info('hillclimb started: score=%f', best_score)
 

@@ -268,12 +268,12 @@ def main():
             max_iterations = int(arg)
         elif option == '-m':
             if arg == 'swapped_cities':
-                move_operator=swapped_cities
+                move_operator = swapped_cities
             elif arg == 'reversed_sections':
-                move_operator=reversed_sections
+                move_operator = reversed_sections
         elif option == '-a':
             if arg == 'hillclimb':
-                run_algorithm=run_hillclimb
+                run_algorithm = run_hillclimb
             elif arg == 'anneal':
                 # do this to pass start_temp and alpha to run_anneal
                 def run_anneal_with_temp(init_function, move_operator,
@@ -281,7 +281,7 @@ def main():
                     return run_anneal(init_function, move_operator,
                                       objective_function, max_iterations,
                                       start_temp, alpha)
-                run_algorithm=run_anneal_with_temp
+                run_algorithm = run_anneal_with_temp
             elif arg == 'evolve':
                 def run_evolve_with_pop_size(init_function, move_operator,
                                              objective_function,
@@ -317,9 +317,9 @@ def main():
     # enable more verbose logging (if required) so we can see workings
     # of the algorithms
     import logging
-    format='%(asctime)s %(levelname)s %(message)s'
+    format = '%(asctime)s %(levelname)s %(message)s'
     if verbose:
-        logging.basicConfig(level=logging.INFO,format=format)
+        logging.basicConfig(level=logging.INFO, format=format)
     else:
         logging.basicConfig(format=format)
 
@@ -327,14 +327,14 @@ def main():
     coords=read_coords(file(city_file))
     init_function=lambda: init_random_tour(len(coords))
     matrix=cartesian_matrix(coords)
-    objective_function=lambda tour: -tour_length(matrix,tour)
+    objective_function=lambda tour: -tour_length(matrix, tour)
 
     logging.info('using move_operator: %s'%move_operator)
 
     iterations, score, best = run_algorithm(init_function, move_operator,
                                             objective_function, max_iterations)
     # output results
-    print iterations,score,best
+    print iterations, score, best
 
     if out_file_name:
         write_tour_to_img(coords, best, '%s: %f' % (city_file, score),
